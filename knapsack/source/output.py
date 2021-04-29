@@ -28,9 +28,6 @@ def optimize(weight, value, population, pop_size, num_generations, threshold, mu
       parameters.append(population[max_fitness[0][0], :])
       return parameters, fitness_history
 
-crossover_rate = float(input("Crossover Rate: "))
-mutation_rate = float(input("Mutation Rate: "))
-
 parameters, fitness_history = optimize(weight, value, initial_population, pop_size, num_generations, knapsack_threshold, mutation_rate, crossover_rate)
 print('Ket qua toi uu: \n{}'.format(parameters))
 selected_items = item_number * parameters
