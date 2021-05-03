@@ -2,8 +2,9 @@ import numpy as np
 import random as rd
 from random import randint
 
+
 class Knapsack:
-	# function calculates fitness
+    # function calculates fitness
     def cal_fitness(weight, value, population, threshold):
         fitness = np.empty(population.shape[0])
         for i in range(population.shape[0]):
@@ -13,8 +14,8 @@ class Knapsack:
                 fitness[i] = S1
             else:
                 fitness[i] = 0
-        return fitness.astype(int)
-	
+        return fitness.astype(float)
+
     def selection(fitness, num_parents, population):
         fitness = list(fitness)
         parents = np.empty((num_parents, population.shape[1]))
@@ -27,7 +28,7 @@ class Knapsack:
     def crossover(parents, num_offsprings, crossover_rate):
         offsprings = np.empty((num_offsprings, parents.shape[1]))
         crossover_point = int(parents.shape[1]/2)
-        
+
         i = 0
         while (parents.shape[0] < num_offsprings):
             parent1_index = i % parents.shape[0]
@@ -44,10 +45,9 @@ class Knapsack:
             i = +1
         return offsprings
 
-
     def mutation(offsprings, mutation_rate):
         mutants = np.empty((offsprings.shape))
-  
+
         for i in range(mutants.shape[0]):
             random_value = rd.random()
             mutants[i, :] = offsprings[i, :]
