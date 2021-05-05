@@ -19,11 +19,31 @@ class Knapsack:
     def selection(fitness, num_parents, population):
         fitness = list(fitness)
         parents = np.empty((num_parents, population.shape[1]))
+        x = rd.random()
         for i in range(num_parents):
             max_fitness_idx = np.where(fitness == np.max(fitness))
             parents[i, :] = population[max_fitness_idx[0][0], :]
             fitness[max_fitness_idx[0][0]] = -999999
         return parents
+    
+    def RouletteSelection(fitness, num_outstanding_parents,num_parents, population):
+        fitness = list(fitness)
+        
+        parents = np.empty((num_parents, population.shape[1]))
+        for i in range(num_outstanding_parents):
+            max_fitness_idx = np.where(fitness == np.max(fitness))
+            parents[i, :] = population[max_fitness_idx[0][0], :]
+            fitness[max_fitness_idx[0][0]] = 0
+        maximun = sum([fitness[i] for i in range(num_parents)])
+        pick = rd.uniform(0, maximun)
+        current = 0
+        for i in range(num_parents - num_outstanding_parents ):
+            current += fitness[i]
+            if current > pick:
+                parents[i + num_outstanding_parents, :] = population[i, :]
+                fitness[i] = 0
+        return parents
+
 
     def crossover(parents, num_offsprings, crossover_rate):
         offsprings = np.empty((num_offsprings, parents.shape[1]))

@@ -80,6 +80,15 @@ overflow: auto;
             <div>   
                 <label for="interaction">Max interaction: </label>
                 <input type="number" class="input-02" name="interaction" value="100">
+          
+            <div>
+                <span>Method selection:</span>
+                <input type="radio" name="method" value="1" checked>
+                <label for="">Rank Selection</label>
+                <input type="radio" name="method" value="2">
+                <label for="">Roulette wheel selection</label>
+            </div>
+                
                 <input type="submit" value="Start">
             </div>
             
@@ -174,7 +183,8 @@ overflow: auto;
             var formData = {
                 crossover: $('input[name="crossover"]').val(),
                 mutation: $('input[name="mutation"]').val(),
-                interaction: $('input[name="interaction"]').val()
+                interaction: $('input[name="interaction"]').val(),
+                method: $('input[name=method]:checked', '#start').val()
             };
 
             $.ajax({

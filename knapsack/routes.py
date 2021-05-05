@@ -37,6 +37,7 @@ def start():
     ip.crossover_rate = request.form.get('crossover', 0.01, type=float)
     ip.mutation_rate = request.form.get('mutation', 0.01, type=float)
     output.num_generations = request.form.get('interaction', 1000, type=int)
+    output.method = request.form.get('method', 2, type=int)
     chart, data, last_population = output.output()
 
     result = {
