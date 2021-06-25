@@ -29,6 +29,7 @@ def optimize(weight, value, population, pop_size, num_generations, threshold, mu
     max_fitness = np.where(
         fitness_last_gen == np.max(fitness_last_gen))
     parameters.append(population[max_fitness[0][0], :])
+
     return parameters, fitness_history, population, fitness_last_gen
 
 
@@ -50,10 +51,14 @@ def output():
                 select = str(selected_items[0][i])
     listPopulation = {}
     for i in range(last_population.shape[0]):
+        weight = 0
+        
+        for j in range(len(last_population[i])):
+            weight += ip.weight[j]*last_population[i][j]
         item = {
             "gen": str(last_population[i]),
             "fitness": int(fitness_last_get[i]),
-            "weight": int(np.sum(ip.weight * parameters))
+            "weight": int(weight)
         }
         listPopulation[i] = item
     data = {

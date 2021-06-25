@@ -26,7 +26,7 @@ def inputData():
 @app.route("/create-initial-population", methods=['POST'])
 def create():
     inp.solutions_per_pop = request.form.get('population_size', 100, type=int)
-    ip.knapsack_threshold = request.form.get('threshold', 35, type=int)
+    ip.knapsack_threshold = request.form.get('threshold', 35, type=int)*2
     population = inp.initialPopulation()
     population = {i: population[i] for i in range(0, len(population), 1)}
     return population

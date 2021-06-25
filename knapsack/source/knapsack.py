@@ -33,15 +33,16 @@ class Knapsack:
         for i in range(num_outstanding_parents):
             max_fitness_idx = np.where(fitness == np.max(fitness))
             parents[i, :] = population[max_fitness_idx[0][0], :]
-            fitness[max_fitness_idx[0][0]] = 0
+            fitness[max_fitness_idx[0][0]] = -999
         maximun = sum([fitness[i] for i in range(num_parents)])
         pick = rd.uniform(0, maximun)
         current = 0
         for i in range(num_parents - num_outstanding_parents ):
-            current += fitness[i]
-            if current > pick:
-                parents[i + num_outstanding_parents, :] = population[i, :]
-                fitness[i] = 0
+            if fitness[i] > 0:
+                current += fitness[i]
+                if current > pick:
+                    parents[i + num_outstanding_parents, :] = population[i, :]
+                    fitness[i] = -999
         return parents
 
 
